@@ -28,15 +28,15 @@ public class Render_Screen {
 		}
 	}
 	
-	public void renderEntity(int xp, int yp, All_Entity entity) { //save entity pixels
+	public void renderEntity(int xp, int yp, All_Entity entity) {
 		xp -= xOffset;
 		yp -= yOffset;
 		for (int y = 0; y < entity.getSprite().getSize(); y++) {
-			int ya = y + yp; //add offset
+			int ya = y + yp;
 			for (int x = 0; x < entity.getSprite().getSize(); x++) {
-				int xa = x + xp; //add offset
-				if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height) break; //fix black margins
-				if(xa < 0) xa = 0; //start at 0 from left
+				int xa = x + xp;
+				if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height) break;
+				if(xa < 0) xa = 0;
 				int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
 				if(color != _transparentColor) _pixels[xa + ya * _width] = color;
 			}
@@ -51,9 +51,9 @@ public class Render_Screen {
 			for (int x = 0; x < entity.getSprite().getSize(); x++) {
 				int xa = x + xp;
 				if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height)
-					break; //fix black margins
+					break;
 				if(xa < 0) xa = 0;
-				int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
+					int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
 				if(color != _transparentColor) 
 					_pixels[xa + ya * _width] = color;
 				else
