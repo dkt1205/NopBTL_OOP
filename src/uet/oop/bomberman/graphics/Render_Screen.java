@@ -53,7 +53,7 @@ public class Render_Screen {
 				if(xa < -entity.getSprite().getSize() || xa >= _width || ya < 0 || ya >= _height)
 					break;
 				if(xa < 0) xa = 0;
-					int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
+				int color = entity.getSprite().getPixel(x + y * entity.getSprite().getSize());
 				if(color != _transparentColor) 
 					_pixels[xa + ya * _width] = color;
 				else
