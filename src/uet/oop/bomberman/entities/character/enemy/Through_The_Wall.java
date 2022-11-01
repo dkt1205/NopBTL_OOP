@@ -16,7 +16,7 @@ import uet.oop.bomberman.output.Audio;
 import java.awt.*;
 
 
-public  class E_Enemy extends C_Character {
+public  class Through_The_Wall extends C_Character {
     protected int _points;
     protected double _speed;
     protected Move _ai;
@@ -25,7 +25,7 @@ public  class E_Enemy extends C_Character {
     protected double _steps;
     protected int _finalAnimation = 30;
     protected Sprites _deadSprite;
-    public E_Enemy(int x, int y, Board_Game board, Sprites dead, double speed, int points) {
+    public Through_The_Wall(int x, int y, Board_Game board, Sprites dead, double speed, int points) {
         super(x, y, board);
         _points = points;
         _speed = speed;
@@ -70,34 +70,14 @@ public  class E_Enemy extends C_Character {
         if (_direction == 2) ya++;
         if (_direction == 3) xa--;
         if (_direction == 1) xa++;
-        if (canMove(xa, ya)) {
+//        if (canMove(xa, ya)) {
             _steps -= 1 + rest;
             move(xa * _speed, ya * _speed);
             _moving = true;
-        } else {
-            _steps = 0;
-            _moving = false;
-        }
-    }
-
-    public void calculateMove1() {
-        int xa = 0, ya = 0;
-        if (_steps <= 0) {
-            _direction = _ai.calculateDirection();
-            _steps = MAX_STEPS;
-        }
-        if (_direction == 0) ya--;
-        if (_direction == 2) ya++;
-        if (_direction == 3) xa--;
-        if (_direction == 1) xa++;
-//        if (canMove(xa, ya)) {
-        _steps -= 1 + rest;
-        move(xa * _speed, ya * _speed);
-        _moving = true;
 //        } else {
 //            _steps = 0;
 //            _moving = false;
-//        }
+//            }
     }
     public void move(double xa, double ya) {
         if (!_alive) return;

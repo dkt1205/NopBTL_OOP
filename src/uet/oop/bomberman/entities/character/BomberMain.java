@@ -1,12 +1,13 @@
 package uet.oop.bomberman.entities.character;
 
 import uet.oop.bomberman.Board_Game;
-import uet.oop.bomberman.GameLoop;
+import uet.oop.bomberman.InitGame;
 import uet.oop.bomberman.entities.All_Entity;
 import uet.oop.bomberman.entities.Layered_Entity;
 import uet.oop.bomberman.entities.bomb.ThreadBomb;
 import uet.oop.bomberman.entities.bomb.ThreadFlame;
 import uet.oop.bomberman.entities.character.enemy.E_Enemy;
+import uet.oop.bomberman.entities.character.enemy.Through_The_Wall;
 import uet.oop.bomberman.entities.tile.Wall_Item;
 import uet.oop.bomberman.entities.tile.destroyable.ThreadBrick;
 import uet.oop.bomberman.graphics.Render_Screen;
@@ -58,12 +59,12 @@ public class BomberMain extends C_Character {
         Render_Screen.setOffset(xScroll, 0);
     }
     private void detectPlaceBomb() {
-        int bombRate = GameLoop.getBombRate();
+        int bombRate = InitGame.getBombRate();
         if (_input.space && _timeBetweenPutBombs < 0 && bombRate >= 1) {
             double centerX = _x + _sprite.getRealWidth() / 2;
             double centerY = _y - _sprite.getRealHeight() / 2;
             placeBomb(Position.pixelToTile(centerX), Position.pixelToTile(centerY));
-            GameLoop.addBombRate(-1);
+            InitGame.addBombRate(-1);
             _timeBetweenPutBombs = 30;
         }
     }
@@ -80,7 +81,7 @@ public class BomberMain extends C_Character {
             b = bs.next();
             if (b.isRemoved()) {
                 bs.remove();
-                GameLoop.addBombRate(1);
+                InitGame.addBombRate(1);
             }
         }
     }
@@ -101,13 +102,13 @@ public class BomberMain extends C_Character {
     protected void calculateMove() {
         _moving = true;
         if (_input.up) {
-            move(0, -GameLoop.getBomberSpeed());
+            move(0, -InitGame.getBomberSpeed());
         } else if (_input.down) {
-            move(0, GameLoop.getBomberSpeed());
+            move(0, InitGame.getBomberSpeed());
         } else if (_input.left) {
-            move(-GameLoop.getBomberSpeed(), 0);
+            move(-InitGame.getBomberSpeed(), 0);
         } else if (_input.right) {
-            move(GameLoop.getBomberSpeed(), 0);
+            move(InitGame.getBomberSpeed(), 0);
         } else {
             _moving = false;
         }
@@ -183,12 +184,14 @@ public class BomberMain extends C_Character {
     }
 
     public boolean collide(All_Entity e) {
+
         if (e instanceof ThreadFlame) {
             this.kill();
             return true;
         }
-        if (e instanceof E_Enemy) {
+        if (e instanceof E_Enemy ||e instanceof Through_The_Wall) {
             this.kill();
+            System.out.println("hsjhfjdshsjhds");
             return true;
         }
         if (e instanceof Wall_Item) return false;
@@ -203,12 +206,6 @@ public class BomberMain extends C_Character {
                 _sprite = Sprites.player_up;
                 if (_moving) {
                     _sprite = Sprites.movingSprite(Sprites.player_up_1, Sprites.player_up_2, _animate, 20);
-                }
-                break;
-            case 1:
-                _sprite = Sprites.player_right;
-                if (_moving) {
-                    _sprite = Sprites.movingSprite(Sprites.player_right_1, Sprites.player_right_2, _animate, 20);
                 }
                 break;
             case 2:

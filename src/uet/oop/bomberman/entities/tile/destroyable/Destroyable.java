@@ -35,7 +35,6 @@ public class Destroyable extends Tile_Item {
 	}
 
 	public boolean collide(All_Entity e) {
-		// @todo: xử lý khi va chạm với Flame
 		if (e instanceof ThreadFlame) destroy();
 		return false;
 	}
@@ -46,15 +45,12 @@ public class Destroyable extends Tile_Item {
 	
 	protected Sprites movingSprite(Sprites normal, Sprites x1, Sprites x2) {
 		int calc = _animate % 30;
-		
 		if(calc < 10) {
 			return normal;
 		}
-			
 		if(calc < 20) {
 			return x1;
 		}
 		return x2;
 	}
-	
 }

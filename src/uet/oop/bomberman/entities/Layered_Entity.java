@@ -15,7 +15,6 @@ public class Layered_Entity extends All_Entity {
 
         for (int i = 0; i < entities.length; i++) {
             _entities.add(entities[i]);
-
             if (i > 1) {
                 if (entities[i] instanceof Destroyable)
                     ((Destroyable) entities[i]).addBelowSprite(entities[i - 1].getSprite());
@@ -33,13 +32,11 @@ public class Layered_Entity extends All_Entity {
     }
 
     public All_Entity getTopEntity() {
-
         return _entities.getLast();
     }
 
     private void clearRemoved() {
         All_Entity top = getTopEntity();
-
         if (top.isRemoved()) {
             _entities.removeLast();
         }
@@ -49,5 +46,4 @@ public class Layered_Entity extends All_Entity {
         All_Entity topEntity = getTopEntity();
         return topEntity.collide(e);
     }
-
 }

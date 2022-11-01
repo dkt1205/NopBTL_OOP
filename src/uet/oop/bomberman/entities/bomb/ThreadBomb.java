@@ -1,7 +1,7 @@
 package uet.oop.bomberman.entities.bomb;
 
 import uet.oop.bomberman.Board_Game;
-import uet.oop.bomberman.GameLoop;
+import uet.oop.bomberman.InitGame;
 import uet.oop.bomberman.entities.ThreadAnimated;
 import uet.oop.bomberman.entities.All_Entity;
 import uet.oop.bomberman.entities.character.C_Character;
@@ -62,13 +62,11 @@ public class ThreadBomb extends ThreadAnimated {
             _flames[i].update();
         }
     }
-
-    //Xử lý Bomb nổ
     protected void explode() {
         _exploded = true;
         C_Character character = _board.getCharacterAtExcluding((int) _x, (int) _y, null);
         if (character != null) character.kill();
-        int radius = GameLoop.getBombRadius();
+        int radius = InitGame.getBombRadius();
         ThreadFlame flame0 = new ThreadFlame((int) _x, (int) _y, 0, radius, _board);
         ThreadFlame flame1 = new ThreadFlame((int) _x, (int) _y, 1, radius, _board);
         ThreadFlame flame2 = new ThreadFlame((int) _x, (int) _y, 2, radius, _board);

@@ -48,16 +48,12 @@ public class FlameLoad extends All_Entity {
 	public void render(Render_Screen screen) {
 		int xt = (int)_x << 4;
 		int yt = (int)_y << 4;
-		
 		screen.renderEntity(xt, yt , this);
 	}
 
 	public void update() {}
 
 	public boolean collide(All_Entity e) {
-		// xử lý khi FlameSegment va chạm với Character
 		return true;
 	}
-
-
 }

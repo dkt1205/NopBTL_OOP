@@ -80,7 +80,6 @@ public class ThreadFlame extends All_Entity {
     }
 
     public boolean collide(All_Entity e) {
-        // xử lý va chạm với Bomber, Enemy
         if (e instanceof BomberMain) ((BomberMain) e).kill();
         if (e instanceof E_Enemy) ((E_Enemy) e).kill();
         if (e instanceof ThreadBrick) ((ThreadBrick) e).destroy();

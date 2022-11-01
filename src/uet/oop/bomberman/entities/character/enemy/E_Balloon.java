@@ -1,16 +1,16 @@
 package uet.oop.bomberman.entities.character.enemy;
 
 import uet.oop.bomberman.Board_Game;
-import uet.oop.bomberman.GameLoop;
-import uet.oop.bomberman.entities.character.enemy.ai.AIMoveRandom;
+import uet.oop.bomberman.InitGame;
+import uet.oop.bomberman.entities.character.enemy.ai.MoveRandom;
 import uet.oop.bomberman.graphics.Sprites;
 
 public class E_Balloon extends E_Enemy {
 
     public E_Balloon(int x, int y, Board_Game board) {
-        super(x, y, board, Sprites.balloom_dead, GameLoop.getBomberSpeed() / 2, 100);
+        super(x, y, board, Sprites.balloom_dead, InitGame.getBomberSpeed() *0.5, 100);
         _sprite = Sprites.balloom_left1;
-        _ai = new AIMoveRandom();
+        _ai = new MoveRandom();
         _direction = _ai.calculateDirection();
     }
 
